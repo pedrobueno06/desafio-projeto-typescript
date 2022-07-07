@@ -1,59 +1,37 @@
-// Como podemos melhorar o esse código usando TS? 
+let botaoAtualizar = document.getElementById('atualizar-saldo');
+let botaoLimpar = document.getElementById('limpar-saldo')!;
+let soma = document.getElementById('soma')! as HTMLInputElement;
+let campoSaldo = document.getElementById('campo-saldo');
 
-// let pessoa1 = {};
-// pessoa1.nome = "maria";
-// pessoa1.idade = 29;
-// pessoa1.profissao = "atriz"
+let saldoTotal = 0
 
-// let pessoa2 = {}
-// pessoa2.nome = "roberto";
-// pessoa2.idade = 19;
-// pessoa2.profissao = "Padeiro";
+limparSaldo()
 
-// let pessoa3 = {
-//     nome: "laura",
-//     idade: "32",
-//     profissao: "Atriz"
-// };
-
-// let pessoa4 = {
-//     nome = "carlos",
-//     idade = 19,
-//     profissao = "padeiro"
-// }
-
-
-enum Profissao{
-    Atriz,
-    Padeiro
+function somarAoSaldo (soma: number) {
+    if (campoSaldo){
+        saldoTotal += soma
+        campoSaldo.innerHTML = saldoTotal.toString();
+        limparCampoSoma();
+    }
 }
 
-type Pessoas = {
-    nome: string,
-    idade: number,
-    profissao: Profissao
+function limparCampoSoma() {
+    soma.value = "";
 }
 
-const pessoa1: Pessoas = {
-    nome: "Maria",
-    idade: 29,
-    profissao: Profissao.Atriz
+function limparSaldo() {
+    if (campoSaldo) {
+        saldoTotal = 0;
+        campoSaldo.innerHTML = saldoTotal.toString();
+    }
 }
 
-const pessoa2: Pessoas = {
-    nome: "Roberto",
-    idade: 19,
-    profissao: Profissao.Padeiro
+if (botaoAtualizar) {
+    botaoAtualizar.addEventListener('click', () => {
+        somarAoSaldo(Number(soma.value));
+    });
 }
 
-const pessoa3: Pessoas = {
-    nome: "Laura",
-    idade: 32,
-    profissao: Profissao.Atriz
-}
-
-const pessoa4: Pessoas = {
-    nome: "Carlos",
-    idade: 19,
-    profissao: Profissao.Padeiro
-}
+botaoLimpar.addEventListener('click', () =>{
+    limparSaldo();
+});
